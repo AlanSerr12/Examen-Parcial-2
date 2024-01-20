@@ -1,0 +1,57 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="provedor" (ngSubmit)="grabar()">
+      <div class="mb-2">
+        <label for="ID_estudiante">Estudiante</label>
+        <select class="form-control" formControlName="ID_estudiante">
+          <option value="0">Seleccione una opción</option>
+          @for (estudiante of listaEstudiantes; track estudiante.ID_estudiante) {
+          <option [value]="estudiante.ID_estudiante">{{ estudiante.Nombre }}</option>
+          }
+        </select>
+
+        @if (provedor.invalid && (provedor.dirty || provedor.touched)) {
+        <div class="alert">
+          @if (provedor.errors?.["required"]) {
+          <div class="ng-invalid">El nombre es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <label for="Materia">Materia</label>
+        <input type="text" class="form-control" formControlName="Materia" />
+        @if (provedor.invalid && (provedor.dirty || provedor.touched)) {
+        <div class="alert">
+          @if (provedor.errors?.["required"]) {
+          <div class="ng-invalid">La materia es requerido</div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-2">
+        <label for="Nota">Nota</label>
+        <input type="text" class="form-control" formControlName="Nota" />
+        @if (provedor.invalid && (provedor.dirty || provedor.touched)) {
+        <div class="alert">
+          @if (provedor.errors?.["required"]) {
+          <div class="ng-invalid">La nota es requerido</div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <button type="submit" class="btn btn-primary">
+          Grabar
+        </button>
+        <button class="btn btn-secondary" routerLink="/calificaciones">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
